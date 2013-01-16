@@ -107,7 +107,7 @@
 - (BOOL)isPrimitive
 {
     char encoding = [self typeEncoding];
-    BOOL isObject = (encoding == '@' || encoding == '#');
+    BOOL isObject = (encoding == '@');
 	return (!isObject);
 }
 

@@ -53,8 +53,8 @@
 {
     OCVField *isaField = _fieldsInNSObject[0];
     STAssertEqualObjects([isaField name], @"isa", @"NSObject's ivar is the 'isa' variable");
-    STAssertFalse([isaField isPrimitive], @"isa is a class, not a primitive");
-    STAssertEqualObjects([isaField valueForObject: _example], [ExampleClass class], @"isa has the expected value of the object's class");
+    STAssertTrue([isaField isPrimitive], @"isa is a class, not a primitive");
+    STAssertEqualObjects([isaField valueForObject: _example], nil, @"isa has the expected value of the object's class");
 }
 
 - (void)testExampleClassHasPrimitiveField
