@@ -10,7 +10,7 @@
 
 @interface OCVField : NSObject
 
-- (NSString*)getName;
+- (NSString*)name;
 - (BOOL)isPrimitive;
 - (id)getValueForObject:(id)o;
 

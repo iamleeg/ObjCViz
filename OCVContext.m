@@ -51,7 +51,7 @@
 	while (field = [e nextObject])
 	{
 		if (![field isPrimitive]) {
-			NSString* name = [field getName];
+			NSString* name = [field name];
 			id ref = [field getValueForObject:obj];
 			if (ref==nil) {
 				NSString* refName = [NSString stringWithFormat:@"%@%@",[obj dotName],name];

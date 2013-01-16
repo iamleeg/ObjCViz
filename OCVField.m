@@ -31,8 +31,8 @@
 	[super dealloc];
 }
 
-- (NSString*)getName {
-	return [[NSString alloc] initWithUTF8String:ivar_getName(instanceVariable)];
+- (NSString*)name {
+	return [NSString stringWithUTF8String:ivar_getName(instanceVariable)];
 }
 
 - (char)typeEncoding
@@ -124,7 +124,7 @@
 
 -(NSString*)description
 {
-	return [NSString stringWithFormat:@"%@ %@",[self typeForCode],[self getName]];
+	return [NSString stringWithFormat:@"%@ %@",[self typeForCode],[self name]];
 }
 
 @end
