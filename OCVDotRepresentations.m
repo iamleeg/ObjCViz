@@ -59,17 +59,17 @@
 
 -(void)appendDotRepresentationToString:(NSMutableString*)s withContext:(OCVContext*)context
 {
-	int i;
+	NSInteger i;
     NSString* dotName = [self dotName];
 	NSArray* keys = [self allKeys];
-	int c = [keys count];
+	NSUInteger c = [keys count];
 	
     [s appendFormat:@"\n%@ [label=\"{%@|{",dotName,[self class]];
 	for (i=0;i<c;i++)
 	{
 		if (i!=0)
 			[s appendString:@"|"];
-		[s appendFormat:@"<f%d> %@",i,[keys objectAtIndex:i]];
+		[s appendFormat:@"<f%ld> %@",(long)i,[keys objectAtIndex:i]];
 	}
 	[s appendString:@"}}\",shape=Mrecord];\n"];
 	
@@ -78,7 +78,7 @@
 		id ref = [self objectForKey:[keys objectAtIndex:i]];
 		if([ref isEqual:[NSNull null]])
 			continue;
-		[s appendFormat:@"%@:f%d -> %@",dotName,i,[ref dotName]];
+		[s appendFormat:@"%@:f%ld -> %@",dotName,(long)i,[ref dotName]];
 		[s appendFormat:@"[label=\"%@\",fontsize=12];\n",[keys objectAtIndex:i]];
 		[context appendGraphvizRepresentationFor:ref toString:s];
     }
@@ -97,7 +97,7 @@
 -(void)appendDotRepresentationToString:(NSMutableString*)s withContext:(OCVContext*)context
 {
 	int i;
-	int c = [self count];
+	NSUInteger c = [self count];
     NSString* dotName = [self dotName];
     
     [s appendFormat:@"\n%@ [label=\"{%@|{",dotName,[self class]];
