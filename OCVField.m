@@ -25,7 +25,9 @@
 	return self;
 }
 
--(void)dealloc {
+-(void)dealloc
+{
+    instanceVariable = NULL;
 	[super dealloc];
 }
 
