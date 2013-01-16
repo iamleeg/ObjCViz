@@ -57,4 +57,12 @@
     STAssertEqualObjects([isaField getValueForObject: _example], [ExampleClass class], @"isa has the expected value of the object's class");
 }
 
+- (void)testExampleClassHasPrimitiveField
+{
+    OCVField *integerVariableField = _fieldsInExampleClass[0];
+    STAssertEqualObjects([integerVariableField getName], @"integerVariable", @"integerVariable field is present");
+    STAssertTrue([integerVariableField isPrimitive], @"integer types are primitive");
+    STAssertNil([integerVariableField getValueForObject: _example], @"Don't support getting primitives");
+}
+
 @end
