@@ -31,13 +31,24 @@
 	[super dealloc];
 }
 
-- (NSString*)name {
-	return [NSString stringWithUTF8String:ivar_getName(instanceVariable)];
+- (const char *)cName
+{
+    return ivar_getName(instanceVariable);
+}
+
+- (NSString*)name
+{
+	return [NSString stringWithUTF8String: [self cName]];
+}
+
+- (const char *)objcType
+{
+    return ivar_getTypeEncoding(instanceVariable);
 }
 
 - (char)typeEncoding
 {
-    return ivar_getTypeEncoding(instanceVariable)[0];
+    return [self objcType][0];
 }
 
 - (NSString *) typeForCode
@@ -120,6 +131,13 @@
 	res = object_getIvar(o, instanceVariable);
     
 	return res;
+}
+
+-(NSString*)primitiveValueDescriptionForObject:(id)anObject
+{
+    id value = [anObject valueForKey: [self name]];
+    
+    return [NSString stringWithFormat: @"%@", value];
 }
 
 -(NSString*)description

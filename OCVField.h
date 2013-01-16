@@ -13,6 +13,7 @@
 - (NSString*)name;
 - (BOOL)isPrimitive;
 - (id)valueForObject:(id)o;
+- (NSString *)primitiveValueDescriptionForObject: (id)anObject;
 
 @end
 
