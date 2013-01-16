@@ -6,7 +6,7 @@
 //  Copyright 2006 No Distance. See LICENSE.txt file.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 @interface OCVField : NSObject {
 	NSString* name;
