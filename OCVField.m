@@ -11,32 +11,36 @@
 
 
 @implementation OCVField
+{
+    Ivar instanceVariable;
+}
 
 -(id)initWithIVar:(Ivar)ivar
 {
 	self = [super init];
     if (self)
     {
-        type = [[NSString alloc] initWithUTF8String:ivar_getTypeEncoding(ivar)];
-        name = [[NSString alloc] initWithUTF8String:ivar_getName(ivar)];
-        offset = ivar_getOffset(ivar);
+        instanceVariable = ivar;
     }
 	return self;
 }
 
 -(void)dealloc {
-	[type release];
-	[name release];
 	[super dealloc];
 }
 
 - (NSString*)getName {
-	return name;
+	return [[NSString alloc] initWithUTF8String:ivar_getName(instanceVariable)];
+}
+
+- (char)typeEncoding
+{
+    return ivar_getTypeEncoding(instanceVariable)[0];
 }
 
 - (NSString *) typeForCode
 {
-	char fc = [type characterAtIndex:0];
+	char fc = [self typeEncoding];
     NSString *rs;
     switch (fc) {
         case '@' :
@@ -100,7 +104,7 @@
 
 - (BOOL)isPrimitive
 {
-	return (![[self typeForCode] isEqualToString:@"id"]);
+	return (!([self typeEncoding] == '@'));
 }
 
 -(id)getValueForObject:(id)o 
@@ -109,14 +113,14 @@
 		return nil;
     
 	id res;
-	res = *(void**)(((void*)o) + offset);
+	res = object_getIvar(o, instanceVariable);
     
 	return res;
 }
 
 -(NSString*)description
 {
-	return [NSString stringWithFormat:@"%@ %@",[self typeForCode],name];
+	return [NSString stringWithFormat:@"%@ %@",[self typeForCode],[self getName]];
 }
 
 @end

@@ -8,11 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OCVField : NSObject {
-	NSString* name;
-	NSString* type;
-	int offset;
-}
+@interface OCVField : NSObject
 
 - (NSString*)getName;
 - (BOOL)isPrimitive;
