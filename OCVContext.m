@@ -52,7 +52,7 @@
 	{
 		if (![field isPrimitive]) {
 			NSString* name = [field name];
-			id ref = [field getValueForObject:obj];
+			id ref = [field valueForObject:obj];
 			if (ref==nil) {
 				NSString* refName = [NSString stringWithFormat:@"%@%@",[obj dotName],name];
 				[s appendFormat:@"%@ -> %@ [label=\"%@\",fontsize=12];\n",[obj dotName],refName, name];
@@ -78,7 +78,7 @@
     [visited addObject:obj];    
     [obj appendDotRepresentationToString:s withContext:self];
     if ([obj processFields])
-        [self processFieldsForObject:obj fields:[obj getFields] toString:s];
+        [self processFieldsForObject:obj fields:[obj OCV_fields] toString:s];
 }
 
 @end

@@ -111,7 +111,7 @@
 	return (!isObject);
 }
 
--(id)getValueForObject:(id)o 
+-(id)valueForObject:(id)o 
 {
 	if ([self isPrimitive])
 		return nil;
@@ -132,7 +132,7 @@
 
 @implementation NSObject (OCVReflect)
 
-- (NSArray*)getFieldsForClass:(Class)klass 
+- (NSArray*)OCV_fieldsForClass:(Class)klass 
 {
 	NSMutableArray* array = [NSMutableArray array];
 	int i;
@@ -152,14 +152,14 @@
 	}
     superclass = class_getSuperclass(klass);
 	if (superclass!=Nil)
-		[array addObjectsFromArray:[self getFieldsForClass:superclass]];
+		[array addObjectsFromArray:[self OCV_fieldsForClass:superclass]];
 	return array;
 }
 
-- (NSArray*)getFields
+- (NSArray*)OCV_fields
 {
 	Class klass = [self class];
-	return [self getFieldsForClass:klass];
+	return [self OCV_fieldsForClass:klass];
 }
 
 @end

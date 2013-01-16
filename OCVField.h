@@ -12,12 +12,12 @@
 
 - (NSString*)name;
 - (BOOL)isPrimitive;
-- (id)getValueForObject:(id)o;
+- (id)valueForObject:(id)o;
 
 @end
 
 
 @interface NSObject (OCVReflect)
-- (NSArray*)getFields;
+- (NSArray*)OCV_fields;
 @end
 

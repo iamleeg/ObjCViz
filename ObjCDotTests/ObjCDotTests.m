@@ -30,8 +30,8 @@
 {
     _obj = [NSObject new];
     _example = [ExampleClass new];
-    _fieldsInNSObject = [_obj getFields];
-    _fieldsInExampleClass = [_example getFields];
+    _fieldsInNSObject = [_obj OCV_fields];
+    _fieldsInExampleClass = [_example OCV_fields];
 }
 
 - (void)tearDown
@@ -54,7 +54,7 @@
     OCVField *isaField = _fieldsInNSObject[0];
     STAssertEqualObjects([isaField name], @"isa", @"NSObject's ivar is the 'isa' variable");
     STAssertFalse([isaField isPrimitive], @"isa is a class, not a primitive");
-    STAssertEqualObjects([isaField getValueForObject: _example], [ExampleClass class], @"isa has the expected value of the object's class");
+    STAssertEqualObjects([isaField valueForObject: _example], [ExampleClass class], @"isa has the expected value of the object's class");
 }
 
 - (void)testExampleClassHasPrimitiveField
@@ -62,7 +62,7 @@
     OCVField *integerVariableField = _fieldsInExampleClass[0];
     STAssertEqualObjects([integerVariableField name], @"integerVariable", @"integerVariable field is present");
     STAssertTrue([integerVariableField isPrimitive], @"integer types are primitive");
-    STAssertNil([integerVariableField getValueForObject: _example], @"Don't support getting primitives");
+    STAssertNil([integerVariableField valueForObject: _example], @"Don't support getting primitives");
 }
 
 @end
