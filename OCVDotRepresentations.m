@@ -23,7 +23,7 @@
     return [NSString stringWithFormat:@"L%p",self];
 }
 
--(NSString*)OCV_label
+-(NSArray *)OCV_primitiveFields
 {
     NSArray *primitiveFields = [[self OCV_fields] filteredArrayUsingPredicate: [NSPredicate predicateWithBlock: ^(OCVField *field, NSDictionary *bindings){
         if ([field isPrimitive])
@@ -33,6 +33,12 @@
         }
         return NO;
     }]];
+    return primitiveFields;
+}
+
+-(NSString*)OCV_label
+{
+    NSArray *primitiveFields = [self OCV_primitiveFields];
     NSString *labelValue = nil;
     NSString *classString = NSStringFromClass([self class]);
     if ([primitiveFields count] == 0)
@@ -41,19 +47,30 @@
     }
     else
     {
-        NSMutableString *dotName = [NSMutableString stringWithFormat: @"{%@}", classString];
+        NSMutableString *dotName = [NSMutableString stringWithFormat: @"{%@}|", classString];
         for (OCVField *field in primitiveFields)
         {
-            [dotName appendString: [NSString stringWithFormat: @"{%@=%@}", [field name], [field primitiveValueDescriptionForObject: self]]];
+            [dotName appendString: [NSString stringWithFormat: @"{%@=%@}|", [field name], [field primitiveValueDescriptionForObject: self]]];
         }
+        //there'll be a trailing pipe
+        [dotName deleteCharactersInRange: NSMakeRange([dotName length] - 1, 1)];
         labelValue = [[dotName mutableCopy] autorelease];
     }
     return labelValue;
 }
 
+-(NSString *)OCV_shape
+{
+    if ([[self OCV_primitiveFields] count] == 0)
+    {
+        return @"box";
+    }
+    return @"Mrecord";
+}
+
 -(void)appendDotRepresentationToString:(NSMutableString*)s withContext:(OCVContext*)context
 {
-	[s appendFormat:@"%@ [label=\"%@\", style=rounded, shape=box];\n",[self dotName],[self OCV_label]];
+	[s appendFormat:@"%@ [label=\"%@\", style=rounded, shape=%@];\n",[self dotName],[self OCV_label], [self OCV_shape]];
 }
 @end
 

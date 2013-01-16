@@ -50,7 +50,7 @@
 - (void)testGeneratingExampleClassGraphviz
 {
     NSString *expectedResult = @"digraph ObjC {\n"
-    @"L%@ [label=\"{ExampleClass}{integerVariable=42}\", style=rounded, shape=box];\n"
+    @"L%@ [label=\"{ExampleClass}|{integerVariable=42}\", style=rounded, shape=Mrecord];\n"
     @"}\n";
     _example->integerVariable = 42;
     NSString *formattedResult = [NSString stringWithFormat: expectedResult, _examplePointerString];
