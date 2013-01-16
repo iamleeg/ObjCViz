@@ -8,15 +8,7 @@
 
 #import "ObjCDotTests.h"
 #import "OCVField.h"
-
-@interface ExampleClass : NSObject
-{
-    @public
-    int integerVariable;
-}
-@end
-@implementation ExampleClass
-@end
+#import "ExampleClass.h"
 
 @implementation ObjCDotTests
 {
@@ -24,14 +16,17 @@
     ExampleClass *_example;
     NSArray *_fieldsInNSObject;
     NSArray *_fieldsInExampleClass;
+    OCVField *_integerVariableField;
 }
 
 - (void)setUp
 {
     _obj = [NSObject new];
     _example = [ExampleClass new];
+    _example->integerVariable = 42;
     _fieldsInNSObject = [_obj OCV_fields];
     _fieldsInExampleClass = [_example OCV_fields];
+    _integerVariableField = _fieldsInExampleClass[0];
 }
 
 - (void)tearDown
@@ -42,6 +37,7 @@
     _obj = nil;
     [_example release];
     _example = nil;
+    _integerVariableField = nil;
 }
 
 - (void)testOneFieldAddedForOneIvar
@@ -59,10 +55,15 @@
 
 - (void)testExampleClassHasPrimitiveField
 {
-    OCVField *integerVariableField = _fieldsInExampleClass[0];
-    STAssertEqualObjects([integerVariableField name], @"integerVariable", @"integerVariable field is present");
-    STAssertTrue([integerVariableField isPrimitive], @"integer types are primitive");
-    STAssertNil([integerVariableField valueForObject: _example], @"Don't support getting primitives");
+    STAssertEqualObjects([_integerVariableField name], @"integerVariable", @"integerVariable field is present");
+    STAssertTrue([_integerVariableField isPrimitive], @"integer types are primitive");
+    STAssertNil([_integerVariableField valueForObject: _example], @"Don't support getting primitives");
+}
+
+- (void)testPrimitiveFieldCanBeDescribed
+{
+    NSString *description = [_integerVariableField primitiveValueDescriptionForObject: _example];
+    STAssertEqualObjects(description, @"42", @"Can get string descriptions of primitives");
 }
 
 @end

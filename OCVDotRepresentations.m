@@ -7,7 +7,7 @@
 //
 
 #import "OCVDotRepresentations.h"
-
+#import "OCVField.h"
 
 @implementation NSObject (DotRepresentation)
 
@@ -20,12 +20,40 @@
 
 -(NSString*)dotName
 {
-	return [NSString stringWithFormat:@"L%p",self];
+    return [NSString stringWithFormat:@"L%p",self];
+}
+
+-(NSString*)OCV_label
+{
+    NSArray *primitiveFields = [[self OCV_fields] filteredArrayUsingPredicate: [NSPredicate predicateWithBlock: ^(OCVField *field, NSDictionary *bindings){
+        if ([field isPrimitive])
+        {
+            //ignore isa
+            return (BOOL)!([[field name] isEqualToString: @"isa"]);
+        }
+        return NO;
+    }]];
+    NSString *labelValue = nil;
+    NSString *classString = NSStringFromClass([self class]);
+    if ([primitiveFields count] == 0)
+    {
+        labelValue = classString;
+    }
+    else
+    {
+        NSMutableString *dotName = [NSMutableString stringWithFormat: @"{%@}", classString];
+        for (OCVField *field in primitiveFields)
+        {
+            [dotName appendString: [NSString stringWithFormat: @"{%@=%@}", [field name], [field primitiveValueDescriptionForObject: self]]];
+        }
+        labelValue = [[dotName mutableCopy] autorelease];
+    }
+    return labelValue;
 }
 
 -(void)appendDotRepresentationToString:(NSMutableString*)s withContext:(OCVContext*)context
 {
-	[s appendFormat:@"%@ [label=\"%@\", style=rounded, shape=box];\n",[self dotName],[self class]];
+	[s appendFormat:@"%@ [label=\"%@\", style=rounded, shape=box];\n",[self dotName],[self OCV_label]];
 }
 @end
 

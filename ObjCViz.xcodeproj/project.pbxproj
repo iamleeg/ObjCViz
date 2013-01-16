@@ -24,6 +24,7 @@
 		98F7FBF616A724AD0076518D /* ObjCDot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F7FBC516A722260076518D /* ObjCDot.framework */; };
 		98F7FBFE16A72D1C0076518D /* DotGenerationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F7FBFD16A72D1C0076518D /* DotGenerationTests.m */; };
 		98F7FC0016A72E5D0076518D /* ObjCDot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F7FBC516A722260076518D /* ObjCDot.framework */; };
+		98F7FC0316A7434F0076518D /* ExampleClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F7FC0216A7434E0076518D /* ExampleClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		98F7FBEA16A722270076518D /* ObjCDotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCDotTests.m; sourceTree = "<group>"; };
 		98F7FBFC16A72D1C0076518D /* DotGenerationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DotGenerationTests.h; sourceTree = "<group>"; };
 		98F7FBFD16A72D1C0076518D /* DotGenerationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DotGenerationTests.m; sourceTree = "<group>"; };
+		98F7FC0116A7434E0076518D /* ExampleClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleClass.h; sourceTree = "<group>"; };
+		98F7FC0216A7434E0076518D /* ExampleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +207,8 @@
 				98F7FBE416A722270076518D /* Supporting Files */,
 				98F7FBFC16A72D1C0076518D /* DotGenerationTests.h */,
 				98F7FBFD16A72D1C0076518D /* DotGenerationTests.m */,
+				98F7FC0116A7434E0076518D /* ExampleClass.h */,
+				98F7FC0216A7434E0076518D /* ExampleClass.m */,
 			);
 			path = ObjCDotTests;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 			files = (
 				98F7FBEB16A722270076518D /* ObjCDotTests.m in Sources */,
 				98F7FBFE16A72D1C0076518D /* DotGenerationTests.m in Sources */,
+				98F7FC0316A7434F0076518D /* ExampleClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
