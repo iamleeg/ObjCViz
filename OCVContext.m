@@ -30,8 +30,11 @@
 
 -(id)init
 {
-	[super init];
-	visited = [[NSMutableSet alloc] init];
+	self = [super init];
+    if (self)
+    {
+        visited = [[NSMutableSet alloc] init];
+    }
 	return self;
 }
 

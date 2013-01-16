@@ -14,10 +14,13 @@
 
 -(id)initWithIVar:(Ivar)ivar
 {
-	[super init];
-	type = [[NSString alloc] initWithUTF8String:ivar_getTypeEncoding(ivar)];
-	name = [[NSString alloc] initWithUTF8String:ivar_getName(ivar)];
-	offset = ivar_getOffset(ivar);
+	self = [super init];
+    if (self)
+    {
+        type = [[NSString alloc] initWithUTF8String:ivar_getTypeEncoding(ivar)];
+        name = [[NSString alloc] initWithUTF8String:ivar_getName(ivar)];
+        offset = ivar_getOffset(ivar);
+    }
 	return self;
 }
 
