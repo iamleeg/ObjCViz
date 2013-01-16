@@ -104,7 +104,9 @@
 
 - (BOOL)isPrimitive
 {
-	return (!([self typeEncoding] == '@'));
+    char encoding = [self typeEncoding];
+    BOOL isObject = (encoding == '@' || encoding == '#');
+	return (!isObject);
 }
 
 -(id)getValueForObject:(id)o 
