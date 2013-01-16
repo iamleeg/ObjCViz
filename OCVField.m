@@ -135,21 +135,9 @@
 
 -(NSString*)primitiveValueDescriptionForObject:(id)anObject
 {
-    NSString *valueDescription = nil;
-    void *discoveredValue = NULL;
-    switch ([self typeEncoding]) {
-        case 'i':
-            discoveredValue = malloc(sizeof(int));
-            object_getInstanceVariable(anObject, [self cName], discoveredValue);
-            valueDescription = [NSString stringWithFormat: @"%i", *(int *)discoveredValue];
-            free(discoveredValue);
-            break;
-            
-        default:
-            //unsupported - you might believe this is incomplete. You'd be correct.
-            break;
-    }
-    return valueDescription;
+    id value = [anObject valueForKey: [self name]];
+    
+    return [NSString stringWithFormat: @"%@", value];
 }
 
 -(NSString*)description
